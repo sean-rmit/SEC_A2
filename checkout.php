@@ -1,5 +1,16 @@
+<?php
+session_start();
+// Include configuration file 
+include_once 'config.php';
+
+// Include database connection file 
+include_once 'dbConnect.php';
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +28,7 @@
     <!-- custom CSS here -->
     <link href="assets/css/style.css" rel="stylesheet" />
 </head>
+
 <body>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
@@ -47,11 +59,11 @@
                             <li><a href="#"><strong>Mail: </strong>info@aliceeshop.com</a></li>
                             <li class="divider"></li>
                             <li><a href="#"><strong>Address: </strong>
-                                <div>
-                                    Melbourne,<br />
-                                    VIC 3000, AUSTRALIA
-                                </div>
-                            </a></li>
+                                    <div>
+                                        Melbourne,<br />
+                                        VIC 3000, AUSTRALIA
+                                    </div>
+                                </a></li>
                         </ul>
                     </li>
                 </ul>
@@ -59,7 +71,7 @@
                     <div class="form-group">
                         <input type="text" placeholder="Enter Keyword Here ..." class="form-control">
                     </div>
-                    &nbsp; 
+                    &nbsp;
                     <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
@@ -70,22 +82,22 @@
     <div class="container">
 
         <div class="row">
-      
+
             <div class="col-md-9">
                 <div>
                     <ol class="breadcrumb">
-                        
+
                         <li class="active">Computers</li>
                     </ol>
                 </div>
                 <!-- /.div -->
                 <div class="row">
                     <div class="btn-group alg-right-pad">
-                        <button type="button" class="btn btn-default"><strong>1235  </strong>items</button>
+                        <button type="button" class="btn btn-default"><strong>1235 </strong>items</button>
                         <div class="btn-group">
                             <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
                                 Sort Products &nbsp;
-      <span class="caret"></span>
+                                <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a href="#">By Price Low</a></li>
@@ -101,80 +113,66 @@
                 </div>
                 <!-- /.row -->
                 <div class="row">
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.jpg" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Product Name </a></h3>
-                                <p>Price : <strong>$ 100</strong>  </p>
-                                
-                                
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
+                    <h3 class="title2">Provide Billing Information</h3>
+                    <form action="index.php" method="post">
+                        <div class="form-group">
+                            <label for="">First Name</label>
+                            <input type="text" name="first-name" class="form-control" />
                         </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.jpg" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Product Name </a></h3>
-                                <p>Price : <strong>$ 100</strong>  </p>
-                                
-                                
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
+                        <div class="form-group">
+                            <label for="">Last Name</label>
+                            <input type="text" name="last-name" class="form-control" />
                         </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.jpg" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Product Name </a></h3>
-                                <p>Price : <strong>$ 100</strong>  </p>
-                                
-                                
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
+                        <div class="form-group">
+                            <label for="">Username</label>
+                            <input type="text" name="username" class="form-control" />
                         </div>
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
+                        <div class="form-group">
+                            <label for="">Email (Optional)</label>
+                            <input type="text" name="email" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">Address</label>
+                            <input type="text" name="address" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="">Address 2 (Optional)</label>
+                            <input type="text" name="address2" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="btnLogin" class="btn btn-primary" value="Login" />
+                        </div>
+                    </form>
 
                 </div>
-                <!-- /.row -->
-                
             </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
+        </div> <!-- /.row -->
+
+    </div>
+    <!-- /.col -->
+    </div>
+    <!-- /.row -->
     </div>
     <!-- /.container -->
-    
+
 
     <!--Footer -->
     <div class="col-md-12 footer-box">
+        <div class="col-md-4">
+            <strong>Our Location</strong>
+            <hr>
+            <p>
+                Swanston St, Melbourne,<br />
+                VIC 3000, Australia<br />
+                Call: +61-000-000-000<br>
+                Email: info@aliceeshop.com<br>
+            </p>
 
-
-        
-
-            <div class="col-md-4">
-                <strong>Our Location</strong>
-                <hr>
-                <p>
-                     Swanston St, Melbourne,<br />
-                                    VIC 3000, Australia<br />
-                    Call: +61-000-000-000<br>
-                    Email: info@aliceeshop.com<br>
-                </p>
-
-                2020 www.aliceeshop.com | All Right Reserved
-            </div>
-          
+            2020 www.aliceeshop.com | All Right Reserved
         </div>
-        <hr>
+
+    </div>
+    <hr>
     </div>
     <!-- /.col -->
     <div class="col-md-12 end-box ">
@@ -190,11 +188,12 @@
     <script src="assets/ItemSlider/js/modernizr.custom.63321.js"></script>
     <script src="assets/ItemSlider/js/jquery.catslider.js"></script>
     <script>
-        $(function () {
+        $(function() {
 
             $('#mi-slider').catslider();
 
         });
-		</script>
+    </script>
 </body>
+
 </html>

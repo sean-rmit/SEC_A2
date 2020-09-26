@@ -1,9 +1,42 @@
 <?php
+session_start();
 // Include configuration file 
 include_once 'config.php';
 
 // Include database connection file 
 include_once 'dbConnect.php';
+
+if (isset($_POST["add"])) {
+    if (isset($_SESSION["cart"])) {
+        $item_array_id = array_column($_SESSION["cart"], "product_id");
+        if (!in_array($_GET["id"], $item_array_id)) {
+            $count = count($_SESSION["cart"]);
+            $item_array = array(
+                'product_id' => $_GET["id"],
+                'product_image' => $_POST["hidden_image"],
+                'item_name' => $_POST["hidden_name"],
+                'product_price' => $_POST["hidden_price"],
+                'item_quantity' => $_POST["quantity"],
+            );
+            $_SESSION["cart"][$count] = $item_array;
+            // echo '<script>window.location="cart.php"</script>';
+            header("Location: cart.php");
+        } else {
+            echo '<script>alert("Product is already Added to Cart")</script>';
+            echo '<script>window.location="cart.php"</script>';
+        }
+    } else {
+        $item_array = array(
+            'product_id' => $_GET["id"],
+            'product_image' => $_POST["hidden_image"],
+            'item_name' => $_POST["hidden_name"],
+            'product_price' => $_POST["hidden_price"],
+            'item_quantity' => $_POST["quantity"],
+        );
+        $_SESSION["cart"][0] = $item_array;
+        header("Location: cart.php");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -117,14 +150,21 @@ include_once 'dbConnect.php';
                     ?>
                         <div class="col-md-4 text-center col-sm-6 col-xs-6">
                             <div class="thumbnail product-box">
-                                <img width="150" height="150" src="assets/img/<?php echo $row['image']; ?>" />
-                                <div class="caption">
-                                    <h3><?php echo $row['name']; ?></h3>
-                                    <p>Price : <strong><?php echo '$' . $row['price'] ?></strong> </p>
-
-
-                                    <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                </div>
+                                <form method="post" action="index.php?action=add&id=<?php echo $row["id"]; ?>">
+                                    <div class="product">
+                                        <img width="150" height="150" src="assets/img/<?php echo $row["image"]; ?>" />
+                                        <div class="caption">
+                                            <h3><?php echo $row["name"]; ?></h3>
+                                            <p>Price : <strong><?php echo '$' . $row["price"] ?></strong> </p>
+                                            <input type="text" name="quantity" class="form-control" value="1">
+                                            <input type="hidden" name="hidden_image" value="<?php echo $row["image"]; ?>">
+                                            <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
+                                            <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
+                                            <input type="submit" name="add" style="margin-top: 5px;" class="btn btn-success" value="Add to Cart">
+                                            <a href="#" style="margin-top: 5px;" class="btn btn-primary" role="button">See Details</a>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     <?php } ?>
